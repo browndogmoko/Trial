@@ -12,18 +12,16 @@
             font-family: 'Segoe UI', Arial, sans-serif;
         }
 
-        /* 全体の背景にtrial_img.jpgを設定 */
         body {
-            background-image: url('trial_img.jpg'); /* リポジトリ内の画像 */
-            background-size: cover; /* 画像を画面全体に */
+            background-image: url('trial_img.jpg');
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* スクロールしても固定 */
+            background-attachment: fixed;
         }
 
-        /* ナビゲーションバー */
         nav {
-            background-color: rgba(44, 62, 80, 0.7); /* 半透明で背景が見える */
+            background-color: rgba(44, 62, 80, 0.7);
             padding: 1rem;
             position: fixed;
             width: 100%;
@@ -46,7 +44,6 @@
             color: #3498db;
         }
 
-        /* ヒーローセクション */
         .hero {
             height: 100vh;
             display: flex;
@@ -56,7 +53,7 @@
             color: white;
             text-align: center;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.5); /* 半透明の黒でテキストが読みやすく */
+            background: rgba(0, 0, 0, 0.5);
         }
         .hero h1 {
             font-size: 3rem;
@@ -67,16 +64,15 @@
             max-width: 600px;
         }
 
-         /* Xタイムラインのコンテナ */
         .twitter-section {
             padding: 2rem;
             max-width: 600px;
             margin: 2rem auto;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.9); /* 半透明白で読みやすく */
+            background: rgba(255, 255, 255, 0.9);
+            min-height: 400px; /* 追加 */
         }
 
-        /* 画像領域 */
         .image-placeholder {
             width: 100%;
             max-width: 800px;
@@ -90,7 +86,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* レスポンシブ対応 */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -103,7 +98,6 @@
     </style>
 </head>
 <body>
-    <!-- ナビゲーションバー -->
     <nav>
         <ul>
             <li><a href="#">メニュー枠１</a></li>
@@ -112,21 +106,17 @@
         </ul>
     </nav>
 
-    <!-- ヒーローセクション -->
     <div class="hero">
         <h1>もこらぼ</h1>
         <p>もこのらぼでもこらぼ</p>
     </div>
 
-<!-- X最新ポストの埋め込みセクション -->
     <div class="twitter-section">
         <h2>私の最新Xポスト</h2>
-        <!-- X公式Embedコード（@yourusernameを自分のユーザー名に置き換え） -->
         <a class="twitter-timeline" href="https://twitter.com/browndogmoko?ref_src=twsrc%5Etfw">by browndogmoko</a> 
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
 
-    <!-- 画像表示用の領域 -->
     <div class="image-placeholder">
         <p>ここは画像表示用の領域</p>
     </div>
