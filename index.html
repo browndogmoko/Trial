@@ -69,8 +69,8 @@
             max-width: 600px;
             margin: 2rem auto;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            min-height: 400px; /* 追加 */
+            background: rgba(255, 255, 255, 0.7); /* 透過率を強く */
+            min-height: 400px;
         }
 
         .image-placeholder {
@@ -94,6 +94,10 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+            .twitter-section, .image-placeholder {
+                max-width: 90%; /* スマホで横幅を狭く */
+                margin: 2rem auto;
+            }
         }
     </style>
 </head>
@@ -112,9 +116,9 @@
     </div>
 
     <div class="twitter-section">
-        <h2>私の最新Xポスト</h2>
+        <h2>最近のできごと</h2>
         <blockquote class="twitter-tweet">
-            <a href="https://twitter.com/browndogmoko/status/1967840631121907975?ref_src=twsrc%5Etfw"></a>
+            <a href="https://twitter.com/browndogmoko/status/1967850304994676819">Tweet</a>
         </blockquote>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
