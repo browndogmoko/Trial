@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>マイホームページ</title>
+    <title>もこらぼ</title>
     <style>
         * {
             margin: 0;
@@ -67,6 +67,15 @@
             max-width: 600px;
         }
 
+         /* Xタイムラインのコンテナ */
+        .twitter-section {
+            padding: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9); /* 半透明白で読みやすく */
+        }
+
         /* 画像領域 */
         .image-placeholder {
             width: 100%;
@@ -105,8 +114,16 @@
 
     <!-- ヒーローセクション -->
     <div class="hero">
-        <h1>ようこそ！私のホームページ</h1>
-        <p>これからここに色々追加していきます！</p>
+        <h1>もこらぼ</h1>
+        <p>もこのらぼでもこらぼ</p>
+    </div>
+
+<!-- X最新ポストの埋め込みセクション -->
+    <div class="twitter-section">
+        <h2>私の最新Xポスト</h2>
+        <!-- X公式Embedコード（@yourusernameを自分のユーザー名に置き換え） -->
+        <a class="twitter-timeline" href="https://twitter.com/browndogmoko?ref_src=twsrc%5Etfw">Tweets by browndogmoko</a> 
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
 
     <!-- 画像表示用の領域 -->
