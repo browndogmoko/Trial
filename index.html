@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="もこらぼ - もこのクリエイティブな活動を紹介するサイト">
+    <meta name="keywords" content="もこらぼ, クリエイティブ, 動画, ブログ">
     <title>もこらぼ</title>
     <style>
         * {
@@ -13,11 +15,49 @@
         }
 
         body {
-            background-image: url('trial_img.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            transition: background 0.5s ease;
+        }
+
+        /* 曜日ごとのテーマ */
+        body.sunday {
+            background: linear-gradient(135deg, #f5f5f5, #ffffff);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        body.monday {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            font-family: 'Roboto', sans-serif;
+        }
+        body.tuesday {
+            background: linear-gradient(135deg, #e74c3c, #ff6b6b);
+            font-family: 'Comic Neue', cursive;
+        }
+        body.wednesday {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            font-family: 'Lora', serif;
+        }
+        body.thursday {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            font-family: 'Merriweather', serif;
+        }
+        body.friday {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            font-family: 'Playfair Display', serif;
+        }
+        body.friday .hero h1::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: gold;
+            margin: 10px auto;
+        }
+        body.saturday {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            font-family: 'Indie Flower', cursive;
         }
 
         nav {
@@ -43,6 +83,12 @@
         nav a:hover {
             color: #3498db;
         }
+        body.friday nav a:hover {
+            color: gold; /* 金曜はゴールドホバー */
+        }
+        body.saturday nav a {
+            font-family: 'Indie Flower', cursive; /* 土曜は手書き風 */
+        }
 
         .hero {
             height: 100vh;
@@ -53,7 +99,8 @@
             color: white;
             text-align: center;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 1s ease-in;
         }
         .hero h1 {
             font-size: 3rem;
@@ -62,6 +109,9 @@
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
+        }
+        body.tuesday .hero h1 {
+            animation: bounce 1s infinite; /* 火曜はバウンス */
         }
 
         .twitter-section {
@@ -98,6 +148,16 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* アニメーション */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -112,34 +172,51 @@
             }
         }
     </style>
+    <!-- Google Fontsの読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Comic+Neue&family=Lora&family=Merriweather&family=Playfair+Display&family=Indie+Flower&display=swap" rel="stylesheet">
 </head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="#">メニュー枠１</a></li>
-            <li><a href="#">メニュー枠２</a></li>
-            <li><a href="#">メニュー枠３</a></li>
+<body id="body">
+    <nav role="navigation">
+        <ul role="menubar">
+            <li role="menuitem"><a href="#hero">ホーム</a></li>
+            <li role="menuitem"><a href="#twitter-section">最近のできごと</a></li>
+            <li role="menuitem"><a href="#video-section">最近の動画</a></li>
         </ul>
     </nav>
 
-    <div class="hero">
+    <div class="hero" id="hero">
         <h1>もこらぼ</h1>
         <p>もこのらぼでもこらぼ</p>
     </div>
 
-    <div class="twitter-section">
+    <div class="twitter-section" id="twitter-section">
         <h2>最近のできごと</h2>
-        <blockquote class="twitter-tweet">
-            <a href="https://twitter.com/browndogmoko/status/1967850304994676819">Tweet</a>
-        </blockquote>
+        <a class="twitter-timeline" data-height="400" href="https://twitter.com/browndogmoko?ref_src=twsrc%5Etfw">Tweets by browndogmoko</a>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
 
-    <div class="video-section">
+    <div class="video-section" id="video-section">
         <h2>最近の動画（配信）</h2>
         <div class="youtube-embed">
             <iframe width="100%" height="315" src="https://www.youtube.com/embed/NxVCIcpXCpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
     </div>
+
+    <script>
+        // スムーズスクロール
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // 曜日ごとのテーマ切り替え
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const today = new Date().getDay();
+        document.getElementById('body').className = days[today];
+    </script>
 </body>
 </html>
