@@ -15,7 +15,7 @@
         }
 
         body {
-            background-image: url('trial_img.jpg'); /* 背景画像復活 */
+            background-image: url('trial_img.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -156,6 +156,30 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* デバッグ用コントロール */
+        .debug-controls {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            text-align: center;
+            z-index: 1000;
+        }
+        .debug-controls button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .debug-controls button:hover {
+            background: #555;
+        }
+
         /* アニメーション */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -177,6 +201,14 @@
             .twitter-section, .video-section {
                 max-width: 90%;
                 margin: 2rem auto;
+            }
+            .debug-controls {
+                flex-direction: column;
+                padding: 0.5rem;
+            }
+            .debug-controls button {
+                margin: 0.2rem 0;
+                width: 100%;
             }
         }
     </style>
@@ -211,6 +243,17 @@
         </div>
     </div>
 
+    <!-- デバッグ用ブロック（必要なら削除） -->
+    <div class="debug-controls">
+        <button onclick="document.getElementById('body').className = 'sunday'">日</button>
+        <button onclick="document.getElementById('body').className = 'monday'">月</button>
+        <button onclick="document.getElementById('body').className = 'tuesday'">火</button>
+        <button onclick="document.getElementById('body').className = 'wednesday'">水</button>
+        <button onclick="document.getElementById('body').className = 'thursday'">木</button>
+        <button onclick="document.getElementById('body').className = 'friday'">金</button>
+        <button onclick="document.getElementById('body').className = 'saturday'">土</button>
+    </div>
+
     <script>
         // スムーズスクロール
         document.querySelectorAll('nav a').forEach(anchor => {
@@ -222,9 +265,9 @@
             });
         });
 
-        // 曜日ごとのテーマ切り替え
+        // 初期ロード時の曜日設定
         const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-        const today = new Date().getDay();
+        const today = new Date().getDay(); // 2025-09-23は火曜（2）
         document.getElementById('body').className = days[today];
     </script>
 </body>
