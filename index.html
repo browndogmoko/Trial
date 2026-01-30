@@ -3,272 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="もこらぼ - もこのクリエイティブな活動を紹介するサイト">
-    <meta name="keywords" content="もこらぼ, クリエイティブ, 動画, ブログ">
-    <title>もこらぼ</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        body {
-            background-image: url('trial_img.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            transition: background 0.5s ease;
-        }
-
-        /* 曜日ごとのオーバーレイ */
-        body.sunday {
-            background-blend-mode: overlay;
-            background-color: rgba(245, 245, 245, 0.7);
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-        body.monday {
-            background-blend-mode: overlay;
-            background-color: rgba(52, 152, 219, 0.7);
-            font-family: 'Roboto', sans-serif;
-        }
-        body.tuesday {
-            background-blend-mode: overlay;
-            background-color: rgba(231, 76, 60, 0.7);
-            font-family: 'Comic Neue', cursive;
-        }
-        body.wednesday {
-            background-blend-mode: overlay;
-            background-color: rgba(46, 204, 113, 0.7);
-            font-family: 'Lora', serif;
-        }
-        body.thursday {
-            background-blend-mode: overlay;
-            background-color: rgba(230, 126, 34, 0.7);
-            font-family: 'Merriweather', serif;
-        }
-        body.friday {
-            background-blend-mode: overlay;
-            background-color: rgba(142, 68, 173, 0.7);
-            font-family: 'Playfair Display', serif;
-        }
-        body.friday .hero h1::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: gold;
-            margin: 10px auto;
-        }
-        body.saturday {
-            background-blend-mode: overlay;
-            background-color: rgba(241, 196, 15, 0.7);
-            font-family: 'Indie Flower', cursive;
-        }
-
-        nav {
-            background-color: rgba(44, 62, 80, 0.7);
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #3498db;
-        }
-        body.friday nav a:hover {
-            color: gold;
-        }
-        body.saturday nav a {
-            font-family: 'Indie Flower', cursive;
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.7);
-            animation: fadeIn 1s ease-in;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-        }
-        body.tuesday .hero h1 {
-            animation: bounce 1s infinite;
-        }
-
-        .twitter-section {
-            padding: 2rem;
-            max-width: 600px;
-            margin: 2rem auto;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.7);
-            min-height: 400px;
-        }
-
-        .video-section {
-            max-width: 800px;
-            margin: 2rem auto;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 2rem;
-        }
-
-        .youtube-embed {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .youtube-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* デバッグ用コントロール */
-        .debug-controls {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 1rem;
-            text-align: center;
-            z-index: 1000;
-        }
-        .debug-controls button {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            margin: 0 0.2rem;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-        .debug-controls button:hover {
-            background: #555;
-        }
-
-        /* アニメーション */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            nav ul {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .twitter-section, .video-section {
-                max-width: 90%;
-                margin: 2rem auto;
-            }
-            .debug-controls {
-                flex-direction: column;
-                padding: 0.5rem;
-            }
-            .debug-controls button {
-                margin: 0.2rem 0;
-                width: 100%;
-            }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Comic+Neue&family=Lora&family=Merriweather&family=Playfair+Display&family=Indie+Flower&display=swap" rel="stylesheet">
+    <title>もこらぼ - Moko Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
-<body id="body">
-    <nav role="navigation">
-        <ul role="menubar">
-            <li role="menuitem"><a href="#hero">ホーム</a></li>
-            <li role="menuitem"><a href="#twitter-section">最近のできごと</a></li>
-            <li role="menuitem"><a href="#video-section">最近の動画</a></li>
-        </ul>
-    </nav>
+<body>
+    <div class="background-animation"></div>
 
-    <div class="hero" id="hero">
-        <h1>もこらぼ</h1>
-        <p>もこのらぼでもこらぼ</p>
-    </div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#updates">Updates</a></li>
+                <li><a href="#videos">Videos</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="twitter-section" id="twitter-section">
-        <h2>最近のできごと</h2>
-        <blockquote class="twitter-tweet">
-            <a href="https://twitter.com/browndogmoko/status/1967850304994676819">Tweet</a>
-        </blockquote>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
+    <main>
+        <section id="home" class="hero">
+            <div class="glass-card hero-content">
+                <h1>もこらぼ</h1>
+                <p>もこのらぼでもこらぼ</p>
+            </div>
+        </section>
 
-    <div class="video-section" id="video-section">
-        <h2>最近の動画（配信）</h2>
-        <div class="youtube-embed">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/NxVCIcpXCpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="container">
+            <section id="updates">
+                <h2 class="section-title">最近のできごと</h2>
+                <div class="glass-card">
+                    <a class="twitter-timeline" data-height="500" data-theme="light" href="https://twitter.com/browndogmoko?ref_src=twsrc%5Etfw">Tweets by browndogmoko</a> 
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </section>
+
+            <section id="videos">
+                <h2 class="section-title">最近の動画（配信）</h2>
+                <div class="video-grid">
+                    <div class="glass-card video-item">
+                        <div class="iframe-container">
+                            <iframe src="https://www.youtube.com/embed/NxVCIcpXCpw" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </div>
+    </main>
 
-    <!-- デバッグ用ブロック（必要なら削除） -->
-    <div class="debug-controls">
-        <button onclick="document.getElementById('body').className = 'sunday'">日</button>
-        <button onclick="document.getElementById('body').className = 'monday'">月</button>
-        <button onclick="document.getElementById('body').className = 'tuesday'">火</button>
-        <button onclick="document.getElementById('body').className = 'wednesday'">水</button>
-        <button onclick="document.getElementById('body').className = 'thursday'">木</button>
-        <button onclick="document.getElementById('body').className = 'friday'">金</button>
-        <button onclick="document.getElementById('body').className = 'saturday'">土</button>
-    </div>
-
-    <script>
-        // スムーズスクロール
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // 初期ロード時の曜日設定
-        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-        const today = new Date().getDay(); // 2025-09-23は火曜（2）
-        document.getElementById('body').className = days[today];
-    </script>
+    <footer>
+        <p>&copy; 2024 もこらぼ</p>
+    </footer>
 </body>
 </html>
