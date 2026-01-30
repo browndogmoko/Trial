@@ -16,12 +16,6 @@
         <div class="circle circle-2"></div>
     </div>
 
-    <aside class="side-sns">
-        <a href="https://twitter.com/（あとでいれる）" target="_blank" class="sns-item"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.youtube.com/@...（あとでいれる）" target="_blank" class="sns-item"><i class="fab fa-youtube"></i></a>
-        <a href="https://github.com/（あとでいれる）" target="_blank" class="sns-item"><i class="fab fa-github"></i></a>
-    </aside>
-
     <header class="yt-style-header">
     <div class="header-left">
         <div class="logo">もこらぼ</div>
@@ -67,11 +61,30 @@
         </div>
     </main>
 
+    <aside class="side-sns">
+        <a href="https://twitter.com/（あとでいれる）" target="_blank" class="sns-item"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.youtube.com/@...（あとでいれる）" target="_blank" class="sns-item"><i class="fab fa-youtube"></i></a>
+        <a href="https://github.com/（あとでいれる）" target="_blank" class="sns-item"><i class="fab fa-github"></i></a>
+    </aside>
+
     <footer>
         <p>&copy; 2026 もこらぼ</p>
     </footer>
 
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div id="moko-char-container" class="moko-char-container" onclick="toggleCharacter()">
+    <div id="moko-bubble" class="moko-bubble">こんにちは！</div>
+    
+    <div class="moko-character">
+        <div class="char-body">
+            <div class="char-head">
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+            </div>
+        </div>
+        <div class="mini-tab">◀</div>
+    </div>
+
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script>
     // マウスの位置をカードに伝える魔法
     document.querySelectorAll('.glass-card').forEach(card => {
@@ -83,6 +96,45 @@
             card.style.setProperty('--mouse-y', `${y}%`);
         });
     });
-</script>
+
+    // 2. キャラクター制御（パーツが見つからない場合のエラーを防ぐ！）
+    const container = document.getElementById('moko-char-container');
+    const bubble = document.getElementById('moko-bubble');
+
+    // ページ読み込みから2秒後に最初の挨拶を出す
+    setTimeout(() => {
+        if(bubble) bubble.classList.add('show');
+    }, 2000);
+
+    // スクロール判定をさらに確実に
+    window.addEventListener('scroll', () => {
+        if (!bubble) return;
+        
+        const sections = document.querySelectorAll('.glass-card, .video-item, .x-container');
+        let currentMessage = "見て回ってね！";
+
+        sections.forEach(sec => {
+            const rect = sec.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4) {
+                if (sec.innerText.includes('動画')) currentMessage = "動画、見てくれる？";
+                if (sec.innerText.includes('できごと')) currentMessage = "最近のニュースだよ！";
+            }
+        });
+
+        if (bubble.innerText !== currentMessage) {
+            bubble.innerText = currentMessage;
+            bubble.classList.add('show');
+        }
+    });
+
+    // 3. 最小化の切り替え関数
+    function toggleCharacter() {
+        const charContainer = document.getElementById('moko-char-container');
+        if (charContainer) {
+            charContainer.classList.toggle('minimized');
+        }
+    }
+    </script>
+</div>
 </body>
 </html>

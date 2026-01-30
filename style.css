@@ -153,12 +153,16 @@ main {
 
 /* Xの枠 */
 .x-container {
-    min-height: 500px;
+    width: 100%;
+    max-width: 800px; /* YouTubeのサイズに合わせる */
+    margin: 0 auto;
+    aspect-ratio: 16 / 9; /* YouTubeと同じ16:9の比率にする */
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1); /* 読み込み中もうっすら枠が見えるように */
-    position: relative;
+    overflow: hidden;
 }
 
 /* 読み込み待ちの時のメッセージを少しおしゃれに */
@@ -341,3 +345,143 @@ main {
     color: white;
     transform: translateX(5px); /* 少し右に飛び出す */
 }
+
+/* 画面の幅が768px以下（スマホ・タブレット）の時の設定 */
+@media screen and (max-width: 768px) {
+    /* 1. ヘッダー：ロゴとステータスを中央寄せに */
+    .header-left {
+        display: flex;
+        flex-direction: column; /* ロゴとバッジを縦に並べる */
+        align-items: center;
+        width: 100%;
+    }
+
+    .status-badge {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    /* 2. セクション：カードの余白をスマホ用に最適化 */
+    .container {
+        padding: 80px 15px 20px; /* ヘッダー分を上に開ける */
+    }
+
+    .glass-card {
+        margin-bottom: 30px; /* セクション間の隙間をしっかり取る */
+        padding: 20px;
+    }
+
+    /* 3. SNSアイコン：セクションの最後に横並びで配置 */
+    .side-sns {
+        position: static; /* 画面に固定せず、ページの流れに乗せる */
+        transform: none;
+        flex-direction: row; /* 横並び */
+        justify-content: center;
+        margin: 40px 0; /* 前後の余白 */
+        gap: 20px;
+    }
+
+    .sns-item {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem; /* アイコンを少し大きく */
+    }
+
+    /* 4. 動画：スマホでも見やすいサイズに */
+    .video-grid {
+        display: block; /* 横並びを防ぐ */
+    }
+}
+
+/* コンテナ：クリック範囲を確保 */
+.moko-char-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    cursor: pointer;
+
+    /* 領域を見えるように背景を追加 */
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(5px);
+    border: 1px dashed rgba(0, 0, 0, 0.2); /* 範囲がわかるように破線 */
+    border-radius: 20px;
+    padding: 10px;
+
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 最小化：右端に少しだけ残して隠す */
+.moko-char-container.minimized {
+    transform: translateX(calc(100% - 0px)); /* 30pxだけ残して右へ */
+}
+
+/* 最小化中に出るタブ */
+.mini-tab {
+    display: none; /* 普段は隠す */
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    background: #333;
+    color: white;
+    border-radius: 5px 0 0 5px;
+    padding: 5px;
+    font-size: 10px;
+}
+
+.minimized .mini-tab { display: block; } /* 最小化中だけ表示 */
+.minimized .moko-bubble { display: none; } /* 最小化中は吹き出しも隠す */
+
+/* 吹き出し：確実に見えるように修正 */
+.moko-bubble {
+    background: #fff;
+    color: #333 !important; /* 文字色を強制 */
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    border: 2px solid #333;
+    margin-bottom: 10px;
+    opacity: 0; /* 最初は透明 */
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    white-space: nowrap; /* 改行させない */
+}
+
+/* この .show がついた時に見えるようになる */
+.moko-bubble.show {
+    opacity: 1 !important;
+    transform: scale(1);
+}
+
+/* 1. 呼吸と瞬きの動き */
+.moko-character {
+    width: 60px;
+    height: 80px;
+    cursor: pointer;
+    animation: breathe 3s infinite ease-in-out; /* 呼吸 */
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.char-head {
+    width: 40px; height: 40px; background: #333; border-radius: 50%; margin: 0 auto;
+    position: relative;
+}
+
+.eye {
+    position: absolute; top: 15px; width: 6px; height: 6px; background: white; border-radius: 50%;
+    animation: blink 4s infinite; /* 瞬き */
+}
+.eye.left { left: 8px; }
+.eye.right { right: 8px; }
+
+@keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); } /* 一瞬だけ潰れる */
+}
+
+.char-body { width: 10px; height: 40px; background: #333; margin: -5px auto 0; }
