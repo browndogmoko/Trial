@@ -2,7 +2,7 @@
     --glass-bg: rgba(255, 255, 255, 0.2);
     --glass-border: rgba(255, 255, 255, 0.3);
     --text-color: #333;
-    --accent-color: #ff9a9e; /* お好みのアクセントカラーに */
+    --accent-color: #ff9a9e;
 }
 
 * {
@@ -17,10 +17,9 @@ body {
     line-height: 1.6;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
-/* 背景の動的な装飾（オプション） */
+/* 背景の動的な装飾 */
 .background-animation {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -29,87 +28,316 @@ body {
                 radial-gradient(circle at 80% 70%, rgba(161, 196, 253, 0.2), transparent 40%);
 }
 
-header {
+/* YouTube風ヘッダー */
+.yt-style-header {
     position: fixed;
-    top: 0; width: 100%;
-    padding: 20px;
-    z-index: 100;
-}
-
-nav ul {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    gap: 30px;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: var(--accent-color);
-}
-
-.hero {
-    height: 80vh;
+    top: 0;
+    width: 100%;
+    height: 60px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.header-left .logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.header-center {
+    flex: 0 1 600px;
+    margin: 0 20px;
+}
+
+.search-bar {
+    display: flex;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px 0 0 20px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.search-bar button {
+    padding: 8px 20px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+}
+
+main {
+    padding-top: 80px;
 }
 
 .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 30px;
+    margin-bottom: 20px;
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
-}
-
-.hero-content h1 {
-    font-size: 4rem;
-    margin-bottom: 10px;
-    letter-spacing: 5px;
 }
 
 .container {
     max-width: 1000px;
     margin: 0 auto;
+    padding: 20px;
+}
+
+.yt-style-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 0 20px;
+    background: rgba(255, 255, 255, 0.8); /* 少し白を強めてヘッダーらしく */
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
 }
 
-.section-title {
-    text-align: center;
-    margin: 60px 0 30px;
+.header-left .logo {
+    font-size: 1.2rem;
     font-weight: 700;
+    letter-spacing: 1px;
 }
 
+.header-center {
+    flex: 0 1 600px; /* 最大600pxまで広がる */
+    margin: 0 20px;
+}
+
+.search-bar {
+    display: flex;
+    width: 100%;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px 0 0 20px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.search-bar button {
+    padding: 8px 20px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+    background: #f8f8f8;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background: #f0f0f0;
+}
+
+/* メインコンテンツがヘッダーに被らないように調整 */
+main {
+    padding-top: 60px;
+}
+
+/* Xの枠 */
+.x-container {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1); /* 読み込み中もうっすら枠が見えるように */
+    position: relative;
+}
+
+/* 読み込み待ちの時のメッセージを少しおしゃれに */
+.x-container a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+/* YouTubeセクションの調整 */
 .video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex; /* グリッドじゃなくフレックスで中央寄せしやすくする */
+    justify-content: center; 
     gap: 20px;
+}
+
+.video-item {
+    width: 100%;
+    max-width: 800px; /* 動画が大きくなりすぎないように制限 */
+    margin: 0 auto;
 }
 
 .iframe-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    padding-top: 56.25%; /* 16:9の比率を維持 */
 }
 
 .iframe-container iframe {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    border-radius: 10px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px; /* 動画の角も少し丸くするとモダン */
 }
 
-footer {
-    text-align: center;
-    padding: 40px;
+/* ① ホバーエフェクト：カードが浮き上がる */
+.glass-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px); /* 上に少し浮く */
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+}
+
+/* ② ガラスがキラリと光るアニメーション */
+.glass-card {
+    position: relative;
+    overflow: hidden; /* 光がはみ出さないように */
+}
+
+.glass-card::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: rotate(30deg);
+    animation: shine 6s infinite; /* 6秒ごとにキラリ */
+}
+
+@keyframes shine {
+    0% { left: -60%; }
+    20% { left: 120%; } /* 20%の時点で通り過ぎる */
+    100% { left: 120%; } /* 残りの時間は待機 */
+}
+
+/* ③ ステータスバッジのアニメーション */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 4px 12px;
+    border-radius: 20px;
     font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ff4b2b; /* ライブ中は赤、休みはグレーなどに */
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* --- 背景の浮遊オブジェクト --- */
+.floating-objects {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; /* 背景よりさらに奥 */
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40%); /* ぼかして光の玉にする */
+    opacity: 0.6;
+    animation: float 10s infinite alternate ease-in-out;
+}
+
+.circle-1 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, #8b4513 0%, #d2b48c 100%);
+    top: 10%; right: -100px;
+}
+
+.circle-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, #a1c4fd 0%, #c2e9fb 100%);
+    bottom: 10%; left: -50px;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to { transform: translate(-100px, 100px) rotate(30deg); }
+}
+
+/* --- カードの光沢エフェクトを「一貫性」あるものに修正 --- */
+.glass-card::after {
+    /* 前の shine アニメーションは消して、こっちに上書き */
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.2) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+.glass-card:hover::after {
+    opacity: 1; /* マウスを乗せた時だけ、背後の光が反射しているように見せる */
+}
+
+/* --- 左側のSNSリンク --- */
+.side-sns {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 100;
+}
+
+.sns-item {
+    width: 45px;
+    height: 45px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.sns-item:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateX(5px); /* 少し右に飛び出す */
 }
